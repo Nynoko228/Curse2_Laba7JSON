@@ -5,10 +5,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -20,6 +17,13 @@ import org.json.simple.parser.ParseException;
 public class Main<T> {
     public static void main(String[] args) throws IOException, ParseException {
         Thing thing = new Thing();
+        System.out.println("Консоль? (y или n)");
+        Scanner scanner = new Scanner(System.in);
+        String flag = scanner.nextLine();
+        if ((flag == "y") || (flag == "Y")){
+
+        }
+
 //
 //        StringWriter writer = new StringWriter();
 //        ObjectMapper mapper = new ObjectMapper();
@@ -35,12 +39,13 @@ public class Main<T> {
 //        JSONObject sampleObject = new JSONObject();
         Write("example.json");
         Read("example.json", thing, Thing.class);
-        
+
     }
     public static void Write(String filename) throws IOException {
         JSONObject sampleObject = new JSONObject();
         Thing thing = new Thing();
         thing.type = "Телевизор";
+        System.out.println(thing);
         StringWriter writer = new StringWriter();
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -49,14 +54,6 @@ public class Main<T> {
             e.printStackTrace();
         }
         String result = writer.toString();
-        sampleObject.put("name", "Stackaffffffffffffbuser");
-        sampleObject.put("age", 35);
-
-        JSONArray messages = new JSONArray();
-        messages.add("Hey!");
-        messages.add("What's up?!");
-
-        sampleObject.put("messages", messages);
 //        Files.write(Paths.get(filename), sampleObject.toJSONString().getBytes());
         Files.write(Paths.get(filename), Collections.singleton(result));
     }
